@@ -35,7 +35,7 @@ namespace Api.Controllers
             
             return Ok(infectados);
         }
-//tentaram me derrubar mas nao conseguiram
+//Implementando o "tentaram me derrubar mas não conseguiram"
         [HttpPut]
         public ActionResult AtualizarInfectado([FromBody] InfectadoDto dto)
         {
@@ -44,6 +44,13 @@ namespace Api.Controllers
             _infectadosCollection.UpdateOne(Builders<Infectado>.Filter.Where(_ => _.DataNascimento == dto.DataNascimento), Builders<Infectado>.Update.Set("sexo", dto.Sexo));
             
             return StatusCode(201, "Atualizado com sucesso");
+        }
+                [HttpDelete("{dataNasc}")]
+        public ActionResult Delete(DateTime dataNasc)
+        {
+            _infectadosCollection.DeleteOne(Builders<Infectado>.Filter.Where(_ => _.DataNascimento == dataNasc);
+            
+            return StatusCode(201, "Deletado com sucesso");
         }
     }
 }
